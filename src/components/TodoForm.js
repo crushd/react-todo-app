@@ -1,8 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { nanoid } from "nanoid";
 
 function TodoForm(props) {
   const [input, setInput] = useState("");
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   const handleChange = (event) => {
     setInput(event.target.value);
@@ -30,6 +36,7 @@ function TodoForm(props) {
           name="text"
           className="todo-input"
           onChange={handleChange}
+          ref={inputRef}
         />
         <button className="todo-button">Add</button>
       </form>
