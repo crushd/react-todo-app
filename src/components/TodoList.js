@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
+import { Flex, Heading } from "@chakra-ui/react";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -41,16 +42,20 @@ function TodoList() {
     setTodos(updatedTodos);
   };
   return (
-    <Fragment>
-      <h1>Today's Tasks</h1>
-      <TodoForm onSubmit={addTodo} />
-      <Todo
-        todos={todos}
-        completeTodos={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-      />
-    </Fragment>
+    <Flex justify="center" direction="column" maxW="960px">
+      <Heading>Today's Tasks</Heading>
+      <Flex p="5">
+        <TodoForm onSubmit={addTodo} />
+      </Flex>
+      <Flex>
+        <Todo
+          todos={todos}
+          completeTodos={completeTodo}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
+      </Flex>
+    </Flex>
   );
 }
 

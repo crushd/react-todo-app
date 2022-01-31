@@ -1,4 +1,5 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { FormControl, FormLabel, Input, Flex, Button } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 
 function TodoForm(props) {
@@ -26,9 +27,10 @@ function TodoForm(props) {
   };
 
   return (
-    <Fragment>
-      <form className="todo-form" onSubmit={handleSubmit}>
-        <input
+    <Flex direction="row" w="100%">
+      <FormControl className="todo-form" onSubmit={handleSubmit}>
+        <FormLabel htmlFor="text" />
+        <Input
           type="text"
           placeholder="Add todo..."
           value={input}
@@ -38,9 +40,9 @@ function TodoForm(props) {
           onChange={handleChange}
           ref={inputRef}
         />
-        <button className="todo-button">Add</button>
-      </form>
-    </Fragment>
+        <Button className="todo-button">Add</Button>
+      </FormControl>
+    </Flex>
   );
 }
 

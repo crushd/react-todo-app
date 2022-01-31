@@ -1,11 +1,12 @@
+import { Flex } from "@chakra-ui/react";
 import "./App.css";
 import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    <div className="Todo-App">
+    <Flex p="5" direction="column" w="100%" justify="center">
       <TodoList />
-    </div>
+    </Flex>
   );
 }
 
