@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, List } from "@chakra-ui/react";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -48,12 +48,14 @@ function TodoList() {
         <TodoForm onSubmit={addTodo} />
       </Flex>
       <Flex>
-        <Todo
-          todos={todos}
-          completeTodos={completeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-        />
+        <List>
+          <Todo
+            todos={todos}
+            completeTodos={completeTodo}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+          />
+        </List>
       </Flex>
     </Flex>
   );
