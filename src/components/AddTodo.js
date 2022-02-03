@@ -33,7 +33,7 @@ function AddTodo({ addTodo }) {
       <HStack m="8" maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "40vw" }}>
         <Input
           variant="filled"
-          placeholder="Add todo..."
+          placeholder="New todo..."
           value={content}
           onChange={(event) => setContent(event.target.value)}
         />
