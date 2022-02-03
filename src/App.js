@@ -1,4 +1,12 @@
-import { Heading, Flex, Link, Box, VStack, IconButton } from "@chakra-ui/react";
+import {
+  Heading,
+  Flex,
+  Link,
+  Box,
+  VStack,
+  IconButton,
+  useColorMode,
+} from "@chakra-ui/react";
 import { Fragment, useState, useEffect } from "react";
 import "./App.css";
 import TodoList from "./components/TodoList";
@@ -36,13 +44,16 @@ function App() {
     setTodos([...todos, todo]);
   }
 
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <VStack p={4}>
       <IconButton
-        icon={<FaSun />}
+        icon={colorMode == "light" ? <FaMoon /> : <FaSun />}
         isRound="true"
         size="lg"
         alignSelf="flex-end"
+        onClick={toggleColorMode}
       />
       <Heading mb="8" fontWeight="extrabold" size="2xl">
         Todo Application
