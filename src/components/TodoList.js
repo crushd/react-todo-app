@@ -1,9 +1,31 @@
 import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
-import { Flex, Heading, List } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  HStack,
+  List,
+  VStack,
+  Text,
+  IconButton,
+  StackDivider,
+  Spacer,
+} from "@chakra-ui/react";
+import { FaTrash } from "react-icons/fa";
 
 function TodoList() {
+  const todoData = [
+    {
+      id: 1,
+      body: "get bread",
+    },
+    {
+      id: 2,
+      body: "get milk",
+    },
+  ];
+
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
@@ -42,22 +64,40 @@ function TodoList() {
     setTodos(updatedTodos);
   };
   return (
-    <Flex justify="center" direction="column" maxW="960px">
-      <Heading>Today's Tasks</Heading>
-      <Flex p="5">
-        <TodoForm onSubmit={addTodo} />
-      </Flex>
-      <Flex>
-        <List>
-          <Todo
-            todos={todos}
-            completeTodos={completeTodo}
-            removeTodo={removeTodo}
-            updateTodo={updateTodo}
-          />
-        </List>
-      </Flex>
-    </Flex>
+    <VStack
+      divider={<StackDivider />}
+      borderColor="gray.100"
+      borderWidth="2px"
+      p="4"
+      borderRadius="lg"
+      w="100%"
+      maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "40vw" }}
+      alignItems="stretch"
+    >
+      <TodoForm onSubmit={addTodo} />
+      {todoData.map((todo) => (
+        <HStack key={todo.id}>
+          <Text>{todo.body}</Text>
+          <Spacer />
+          <IconButton icon={<FaTrash />} isRound="true" />
+        </HStack>
+      ))}
+      {/* <Flex justify="center" direction="column" w="100%">
+        <Flex p="5">
+          
+        </Flex>
+        <Flex>
+          <List>
+            <Todo
+              todos={todos}
+              completeTodos={completeTodo}
+              removeTodo={removeTodo}
+              updateTodo={updateTodo}
+            />
+          </List>
+        </Flex>
+      </Flex> */}
+    </VStack>
   );
 }
 

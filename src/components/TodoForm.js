@@ -5,7 +5,7 @@ import {
   Input,
   Flex,
   Button,
-  Stack,
+  HStack,
 } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 
@@ -34,25 +34,24 @@ function TodoForm(props) {
   };
 
   return (
-    <Flex direction="row" w="100%">
-      <form className="todo-form" onSubmit={handleSubmit}>
-        <Stack direction="row">
-          <Input
-            type="text"
-            placeholder="Add todo..."
-            value={input}
-            id="text"
-            name="text"
-            className="todo-input"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-          <Button className="todo-button" type="submit">
-            Add Todo
-          </Button>
-        </Stack>
-      </form>
-    </Flex>
+    <form className="todo-form" onSubmit={handleSubmit}>
+      <HStack direction="row" mt="4">
+        <Input
+          variant="filled"
+          type="text"
+          placeholder="Add todo..."
+          value={input}
+          id="text"
+          name="text"
+          className="todo-input"
+          onChange={handleChange}
+          ref={inputRef}
+        />
+        <Button px="8" colorScheme="pink" className="todo-button" type="submit">
+          Add Todo
+        </Button>
+      </HStack>
+    </form>
   );
 }
 
