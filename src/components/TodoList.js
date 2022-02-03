@@ -2,67 +2,27 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import {
-  Flex,
-  Heading,
   HStack,
-  List,
   VStack,
   Text,
   IconButton,
   StackDivider,
   Spacer,
+  Badge,
 } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 
-function TodoList() {
-  const todoData = [
-    {
-      id: 1,
-      body: "get bread",
-    },
-    {
-      id: 2,
-      body: "get milk",
-    },
-  ];
+function TodoList({ todos, deleteTodo }) {
+  //const [todos, setTodos] = useState([]);
 
-  const [todos, setTodos] = useState([]);
-
-  const addTodo = (todo) => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
-      return;
-    }
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-    console.log(todo, ...todos);
-  };
-
-  const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
-    }
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
+  if (!todos.length) {
+    return (
+      <Badge colorScheme="green" m="4" p="2" borderRadius="lg">
+        There's nothing here
+      </Badge>
     );
-  };
+  }
 
-  const removeTodo = (id) => {
-    //checking the array
-    const removeArr = [...todos].filter((todo) => todo.id !== id);
-    //remove from array
-    setTodos(removeArr);
-  };
-
-  const completeTodo = (id) => {
-    let updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        // toggle between true and false
-        todo.isComplete = !todo.isComplete;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
   return (
     <VStack
       divider={<StackDivider />}
@@ -74,29 +34,17 @@ function TodoList() {
       maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "40vw" }}
       alignItems="stretch"
     >
-      <TodoForm onSubmit={addTodo} />
-      {todoData.map((todo) => (
+      {todos.map((todo) => (
         <HStack key={todo.id}>
           <Text>{todo.body}</Text>
           <Spacer />
-          <IconButton icon={<FaTrash />} isRound="true" />
+          <IconButton
+            icon={<FaTrash />}
+            isRound="true"
+            onClick={() => deleteTodo(todo.id)}
+          />
         </HStack>
       ))}
-      {/* <Flex justify="center" direction="column" w="100%">
-        <Flex p="5">
-          
-        </Flex>
-        <Flex>
-          <List>
-            <Todo
-              todos={todos}
-              completeTodos={completeTodo}
-              removeTodo={removeTodo}
-              updateTodo={updateTodo}
-            />
-          </List>
-        </Flex>
-      </Flex> */}
     </VStack>
   );
 }
